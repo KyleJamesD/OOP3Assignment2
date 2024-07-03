@@ -11,7 +11,7 @@ package utilities;
  * 
  * Class Definition: This interface represent the public contract for the implementation of a Queue ADT. The Queue must be 
  * able to enqueue (add) elements to the front of the queue, to dequeue (remove) elements from the front of the Queue
- * to peek at the elemtns in the queue and check to see if the object is located in the Queue.
+ * to peek at the elements in the queue and check to see if the object is located in the Queue.
  * 
  * 
  * 
@@ -56,12 +56,13 @@ public interface QueueADT<T> {
     
     /**
      * Preconditions: 
-     * 
+     * The Queue must not be empty
      * 
      * Post conditions:
+     * Returns the object from the front of the Queue without removing it form the Queue
      * 
-     * 
-     * @return 
+     * @return The front Object of the Queue
+     * @throws QueueIsEmptyException
      */
     public T peek();
     
@@ -69,24 +70,28 @@ public interface QueueADT<T> {
     
     /**
      * Preconditions: 
+     * The Queue must not be empty
      * 
      * 
      * Post conditions:
-     * 
+     * Returns true if the object is within the queue
      * 
      * @param t
-     * @return 
+     * @return true if the object is in the queue
+     * @return false if the object is not in the queue
+     * @throws QueueIsEmptyException
      */
     public boolean checkQueue(T t);
     
     /**
      * Preconditions: 
-     * 
+     * None.
      * 
      * Post conditions:
+     * Checks if the Queue is empty
      * 
-     * 
-     * @return 
+     * @return true if the queue is empty
+     * @return false if the queue is not empty
      */
     public boolean isEmpty();
     
