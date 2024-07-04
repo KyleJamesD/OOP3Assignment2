@@ -15,11 +15,11 @@ package utilities;
  * 
  * 
  * 
- * @param <T> the type of elements held in the Queue
+ * @param <E> the type of elements held in the Queue
  * @author kyled
  * 
  */
-public interface QueueADT<T> {
+public interface QueueADT<E> {
     
     
     /**
@@ -32,9 +32,9 @@ public interface QueueADT<T> {
      * 
      * 
      * @param t The object to be added
-     * @throws ElementIsNullException
+     * @throws ElementIsNullException If the element is null
      */
-    public void enqueue (T t);
+    public void enqueue (E e);
     
     
     
@@ -49,7 +49,7 @@ public interface QueueADT<T> {
      * @return The front object of the queue
      * @throws QueueIsEmptyException if the Queue is empty
      */
-    public T dequeue();
+    public E dequeue();
     
     
     
@@ -62,9 +62,9 @@ public interface QueueADT<T> {
      * Returns the object from the front of the Queue without removing it form the Queue
      * 
      * @return The front Object of the Queue
-     * @throws QueueIsEmptyException
+     * @throws QueueIsEmptyException if the Queue is empty
      */
-    public T peek();
+    public E peek();
     
     
     
@@ -79,9 +79,9 @@ public interface QueueADT<T> {
      * @param t
      * @return true if the object is in the queue
      * @return false if the object is not in the queue
-     * @throws QueueIsEmptyException
+     * @throws QueueIsEmptyException if the Queue is empty
      */
-    public boolean checkQueue(T t);
+    public boolean checkQueue(E e);
     
     /**
      * Preconditions: 

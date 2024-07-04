@@ -10,11 +10,11 @@ package utilities;
  * and check the stack to see if a element is located in the stack. 
  * 
  * 
- * @param <T> the type of elements held in the Stack
+ * @param <E> the type of elements held in the Stack
  * 
  * @author kyled
  */
-public interface StackADT<T> {
+public interface StackADT<E> {
     
     
     /**
@@ -29,7 +29,7 @@ public interface StackADT<T> {
      * @throws ElementIsNullException if null object is passed
      *  
      */
-    public void push(T t);
+    public void push(E e);
     
     /**
      * Preconditions:
@@ -43,7 +43,7 @@ public interface StackADT<T> {
      * @throws StackIsEmptyException if the stack is empty
      * 
      */
-    public T  pop();
+    public E  pop();
     
     /**
      * Preconditions:
@@ -57,7 +57,7 @@ public interface StackADT<T> {
      * @return The top most object of the stack
      * @throws StackIsEmptyException if the stack is empty
      */
-    public T peek ();
+    public E peek ();
     
     /**
      * Preconditions:
@@ -72,7 +72,7 @@ public interface StackADT<T> {
      * @return returns True if the object is in the stack otherwise returns false
      * @throws StackIsEmptyException if the stack is empty
      */
-    public boolean checkStack(T t);
+    public boolean checkStack(E e);
     
     
     
