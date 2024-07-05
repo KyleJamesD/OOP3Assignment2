@@ -18,11 +18,6 @@ public interface StackADT<E> {
     
     
     /**
-     * Preconditions:
-     * The Element to be pushed cannot not be null
-     * 
-     * 
-     * Post conditions: 
      * Pushes the parameter element T to the top of the stack
      * 
      * @param t The Object to be pushed
@@ -33,10 +28,7 @@ public interface StackADT<E> {
     
     /**
      * Preconditions:
-     * The stack must not be empty
      * 
-     * 
-     * Post conditions:
      * Removes the Top object from the stack and returns it. 
      * 
      * @return The Top object of the stack
@@ -47,12 +39,8 @@ public interface StackADT<E> {
     
     /**
      * Preconditions:
-     * The stack must not be empty
      * 
-     * 
-     * 
-     * Post conditions:
-     * will return the top most object from the stack without removing it. 
+     * Will return the top most object from the stack without removing it. 
      * 
      * @return The top most object of the stack
      * @throws StackIsEmptyException if the stack is empty
@@ -61,9 +49,7 @@ public interface StackADT<E> {
     
     /**
      * Preconditions:
-     * The stack must not be empty
      * 
-     * Post conditions:
      * returns true if the object is within the stack
      * 
      * 
@@ -77,10 +63,7 @@ public interface StackADT<E> {
     
     
     /**
-     * Preconditions:
-     * None.
      * 
-     * Post conditions:
      * Checks if the stack is empty
      * 
      * @return true if the stack is empty

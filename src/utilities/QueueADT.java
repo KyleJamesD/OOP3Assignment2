@@ -23,11 +23,7 @@ public interface QueueADT<E> {
     
     
     /**
-     * Preconditions: 
-     * The element to be added cannot be null
      * 
-     * 
-     * Post conditions:
      * The Element must be added to the Tail of the Queue
      * 
      * 
@@ -39,11 +35,7 @@ public interface QueueADT<E> {
     
     
     /**
-     * Preconditions: 
-     * The Queue cannot be empty
-     * 
-     * 
-     * Post conditions:
+     *
      * Removes the object from the Front of the Queue and returns it.
      * 
      * @return The front object of the queue
@@ -55,10 +47,7 @@ public interface QueueADT<E> {
     
     
     /**
-     * Preconditions: 
-     * The Queue must not be empty
      * 
-     * Post conditions:
      * Returns the object from the front of the Queue without removing it form the Queue
      * 
      * @return The front Object of the Queue
@@ -69,11 +58,7 @@ public interface QueueADT<E> {
     
     
     /**
-     * Preconditions: 
-     * The Queue must not be empty
-     * 
-     * 
-     * Post conditions:
+     *
      * Returns true if the object is within the queue
      * 
      * @param t
@@ -84,10 +69,7 @@ public interface QueueADT<E> {
     public boolean checkQueue(E e);
     
     /**
-     * Preconditions: 
-     * None.
      * 
-     * Post conditions:
      * Checks if the Queue is empty
      * 
      * @return true if the queue is empty
