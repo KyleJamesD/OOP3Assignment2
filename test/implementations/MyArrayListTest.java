@@ -26,6 +26,11 @@ public class MyArrayListTest {
         System.out.println("size");
         int capacity = 10;
         Double data[] = new Double[10];
+        data[0] = (double)6;
+        
+        
+        
+        
         
         ListADT instance = new MyArrayList(capacity,data);
         int expResult = 0;

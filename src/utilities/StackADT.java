@@ -27,7 +27,6 @@ public interface StackADT<E> {
     public void push(E e);
     
     /**
-     * Preconditions:
      * 
      * Removes the Top object from the stack and returns it. 
      * 
@@ -38,7 +37,6 @@ public interface StackADT<E> {
     public E  pop();
     
     /**
-     * Preconditions:
      * 
      * Will return the top most object from the stack without removing it. 
      * 
@@ -48,7 +46,6 @@ public interface StackADT<E> {
     public E peek ();
     
     /**
-     * Preconditions:
      * 
      * returns true if the object is within the stack
      * 

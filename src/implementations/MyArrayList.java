@@ -13,7 +13,7 @@ import utilities.ListADT;
  *
  * @author kyled
  */
-public class MyArrayList<E> implements ListADT<E> {
+public class MyArrayList<E> implements ListADT<E>,Iterator<E> {
     
 
     //size is the current element count of the list, when new list is created this will always be zero
@@ -260,6 +260,29 @@ public class MyArrayList<E> implements ListADT<E> {
         return iterator;
         
     }
+
+    
+    
+    @Override
+        public boolean hasNext() {
+            
+            int index = 0;
+            return index < data.length;
+        }
+
+        
+        
+        @Override
+        public E next()throws NoSuchElementException{
+            
+            //will return null elements in the array
+            int index = 0;
+            if(index < data.length)
+            {return data[index++];}
+
+            throw new NoSuchElementException();
+
+        }
         
         
 
