@@ -12,14 +12,17 @@ import utilities.ListADT;
  *
  * @author kyled
  */
-public class MyArrayList<E> implements ListADT<E> , Iterator<E> {
+public class MyArrayList<E> implements ListADT<E> {
     
+
     //size is the current element count of the list, when new list is created this will always be zero
     private int size;
     //capacity is the total amount of elements the list can hold, default is 10.
     public int capacity = 10;
     //The underlying Data structure to store the elements in this list, a Regular Array.
-    E [] data;
+    E[] data;
+    
+  
 
     
     public MyArrayList(int capacity) {
@@ -45,7 +48,7 @@ public class MyArrayList<E> implements ListADT<E> , Iterator<E> {
     }
     
     
-   
+   //returns the current amount of elements in the list, can be 0-10
     @Override
     public int size() {
         return size;
@@ -64,7 +67,7 @@ public class MyArrayList<E> implements ListADT<E> , Iterator<E> {
     public boolean add(int index, E toAdd) throws NullPointerException, IndexOutOfBoundsException {
         
         //index = 0-9 must use zero based indexing
-        //capacity = 1- 10 or whatever is set
+        //capacity = 1 - 10 or whatever is set
         //data = 0-9
         //size = 0 - 10 or whatever is set, can be zero if list is empty
         if(index >= capacity || index < 0 ){
@@ -84,14 +87,38 @@ public class MyArrayList<E> implements ListADT<E> , Iterator<E> {
     }
 
     @Override
-    public boolean add(Object toAdd) throws NullPointerException, IndexOutOfBoundsException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean add(E toAdd) throws NullPointerException, IndexOutOfBoundsException {
+        
+        if (size == capacity){
+        return false;
+        }
+        
+        data[size] = toAdd;
+        size++;
+        return true;
     }
-
+    
     @Override
-    public boolean addAll(ListADT toAdd) throws NullPointerException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
+        
+        if (toAdd == null) {
+        throw new NullPointerException("The collection to add cannot be null.");
+        }
+        
+        Iterator<? extends E> iterator = toAdd.iterator();
+        while (iterator.hasNext()) {
+            E element = iterator.next();
+
+
+            data[size] = element;
+            size++;
+        }
+
+        return true;
+
+        }
+
+
 
     @Override
     public E get(int index) throws IndexOutOfBoundsException {
@@ -134,18 +161,21 @@ public class MyArrayList<E> implements ListADT<E> , Iterator<E> {
     }
 
     @Override
-    public Iterator iterator() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Iterator<E> iterator() {
+        
+        GenericIterator iterator = new GenericIterator(data);
+        return iterator;
+        
     }
+        
+        
 
-    @Override
-    public boolean hasNext() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+ 
 
-    @Override
-    public E next() throws NoSuchElementException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  
+
+    
     
 }
+
+
