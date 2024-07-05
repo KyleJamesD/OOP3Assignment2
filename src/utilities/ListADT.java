@@ -51,7 +51,8 @@ public interface ListADT<E> extends Serializable
 	 * 			If the index is out of range: 
 	 * 			i.e. (<code>index < 0 || index > size()</code>).
 	 */
-	public boolean add( int index, E toAdd ) throws NullPointerException,IndexOutOfBoundsException;
+	public boolean add( int index, E toAdd ) throws NullPointerException,
+													IndexOutOfBoundsException;
 	
 	
 	/**
@@ -73,7 +74,8 @@ public interface ListADT<E> extends Serializable
 	 * 			If the index is out of range: 
 	 * 			i.e. (<code>index < 0 || index > size()</code>).
 	 */
-	public boolean add( E toAdd ) throws NullPointerException,IndexOutOfBoundsException;
+	public boolean add( E toAdd ) throws NullPointerException,
+										IndexOutOfBoundsException;
 	
 	
 	/**
@@ -160,7 +162,8 @@ public interface ListADT<E> extends Serializable
 	 * 			If the index is out of range: 
 	 * 			i.e. (<code>index < 0 || index >= size()</code>).
 	 */
-	public E set( int index, E toChange ) throws NullPointerException,IndexOutOfBoundsException;
+	public E set( int index, E toChange ) throws NullPointerException,
+												IndexOutOfBoundsException;
 	
 	
 	/**

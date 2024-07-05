@@ -4,6 +4,7 @@
  */
 package implementations;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import utilities.Iterator;
 import utilities.ListADT;
@@ -41,6 +42,7 @@ public class MyArrayList<E> implements ListADT<E> {
 
     
     //if an array is passed this method will parse the Array into our new Array
+    
     public final void setData(E[] data) {
         for(int i = 0; i <size; i++)
             this.data[i] = data[i];
@@ -74,6 +76,7 @@ public class MyArrayList<E> implements ListADT<E> {
             throw new IndexOutOfBoundsException("The given location is beyond the capacity or less then zero.");
         }
         else if (size == capacity){
+            //the array is already full
             return false;
         }
         else{
@@ -137,13 +140,21 @@ public class MyArrayList<E> implements ListADT<E> {
     @Override
     public E remove(int index) throws IndexOutOfBoundsException {
 
-        if(index >= capacity)
-            throw new IndexOutOfBoundsException("Index cannot be bigger then capactiy");
+        if(index >= size)
+            throw new IndexOutOfBoundsException("Index cannot be bigger then curent Size of the List");
         
         E removed = data[index];
+        
+        
+        
+        if(index == size-1){
+        data[index] = null;
+        }
+        else
+        {
         for (int i = index; i<size-1; i++)
             data[i] = data[i+1];
-          
+        } 
         
         size--;
         return removed;
@@ -153,32 +164,93 @@ public class MyArrayList<E> implements ListADT<E> {
 
     @Override
     public E remove(E toRemove) throws NullPointerException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        for (int i = 0; i < size; i++){
+            if (data[i].equals(toRemove) ){
+                E toReturn = data[i];
+                data[i] = null;
+                return toReturn;
+            }
+        }
+        return null;
     }
 
     @Override
     public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(index >= size)
+            throw new IndexOutOfBoundsException("Index cannot be bigger then curent Size of the List");
+        
+        
+        E toReturn;
+        toReturn = data[index];
+        data[index] = toChange;
+        return toReturn;
+
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return size==0;
+        
+
     }
 
     @Override
     public boolean contains(E toFind) throws NullPointerException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        for(int i=0; i < size;i++){
+        if (data[i].equals(toFind))
+        {return true;}
+        }
+        return false;
+
+
     }
 
     @Override
     public E[] toArray(E[] toHold) throws NullPointerException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        if (toHold == null) {
+            throw new NullPointerException("The specified array is null. Please Intialize before passing (you probably only declared it n00b).");
+        }
+        
+        
+        if(toHold.length >= capacity){
+            for(int i=0; i < size; i++){
+                toHold[i] = data[i];
+            }
+            return toHold;
+            
+        }
+        
+        
+        /*
+        Not the most efficient way to create a new array
+        
+        int newArraySize = toHold.length;
+        while(newArraySize < capacity){  
+            newArraySize++;
+            //newArraysize = newArraySize*2;
+        }
+        E[] newArray =(E[]) new Object[newArraySize];
+        */
+        
+        
+        
+        // generic type arrays cannot be created so cheat by casting to generic from object array
+        E[] newArray =(E[]) new Object[capacity];
+        
+        for(int i=0; i < newArray.length; i++){
+                newArray[i] = data[i];
+            }
+            return newArray;
+
     }
 
     @Override
     public Object[] toArray() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return Arrays.copyOf(data,size);
+
     }
 
     @Override
