@@ -105,6 +105,10 @@ public class MyArrayList<E> implements ListADT<E> {
         throw new NullPointerException("The collection to add cannot be null.");
         }
         
+        //this calls the object.iterator(); method, NOT MYARRAYLISTS iterator();
+        
+        //they both have a function with the same name because they both implement ListADT
+        //toAdd has its own implementation of iterator().
         Iterator<? extends E> iterator = toAdd.iterator();
         while (iterator.hasNext()) {
             E element = iterator.next();
@@ -113,7 +117,6 @@ public class MyArrayList<E> implements ListADT<E> {
             data[size] = element;
             size++;
         }
-
         return true;
 
         }
@@ -122,12 +125,30 @@ public class MyArrayList<E> implements ListADT<E> {
 
     @Override
     public E get(int index) throws IndexOutOfBoundsException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        if(index >= capacity)
+            throw new IndexOutOfBoundsException("Index cannot be bigger then capactiy");
+        
+        return data[index];
+
+
     }
 
     @Override
     public E remove(int index) throws IndexOutOfBoundsException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        if(index >= capacity)
+            throw new IndexOutOfBoundsException("Index cannot be bigger then capactiy");
+        
+        E removed = data[index];
+        for (int i = index; i<size-1; i++)
+            data[i] = data[i+1];
+          
+        
+        size--;
+        return removed;
+        
+
     }
 
     @Override
