@@ -262,7 +262,7 @@ public class MyArrayList<E> implements ListADT<E>,Iterator<E> {
     }
 
     
-    
+    //is this correct??
     @Override
         public boolean hasNext() {
             int index = 0;

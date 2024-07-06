@@ -22,8 +22,7 @@ public class MyDLL<E> implements ListADT<E>,Iterator<Node> {
 
     public MyDLL() {
         head = tail = null;
-        size = 0;
-        
+        size = 0;  
     }
 
     
@@ -31,7 +30,6 @@ public class MyDLL<E> implements ListADT<E>,Iterator<Node> {
     @Override
     public int size() {
         return size;
-
     }
 
     @Override
@@ -114,7 +112,7 @@ public class MyDLL<E> implements ListADT<E>,Iterator<Node> {
             head = newNode;
             tail = newNode;
             size++;
-        return true;
+            return true;
         }
         
         newNode.previous = tail;
@@ -132,6 +130,7 @@ public class MyDLL<E> implements ListADT<E>,Iterator<Node> {
         throw new NullPointerException("The collection to add cannot be null.");
         }
         
+        //we do not need size ++ as this is handled by add()
         Iterator<? extends E> iterator = toAdd.iterator();
         while (iterator.hasNext()) {
             add(iterator.next());
@@ -226,11 +225,78 @@ public class MyDLL<E> implements ListADT<E>,Iterator<Node> {
         return current.value;
     }
 
+    
     @Override
-    public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException {
+    public E remove(E toRemove) throws NullPointerException {
 
         
+        // very inefficient
+        Node current = head;
+        for(int i = 0; i < size; i++){
+            if(current.value == null && toRemove == null){
+                E toReturn = remove(i);
+                return toReturn;
+            }
+            if(current.value.equals(toRemove)){
+                E toReturn = remove(i);
+                return toReturn;
+            }
+            current = current.next;
+        }
+        return null;
 
+
+    }
+
+    
+    
+    
+    
+    
+    
+    @Override
+    public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException {
+            if (index < 0 || index >= size) {
+                throw new IndexOutOfBoundsException("Index out of range: " + index);
+            }
+
+            //to remove the element at the head
+            if(index == 0 ){
+                E toReturn = head.value;
+                head.value = toChange;
+                return toReturn;
+            }
+
+            else if(index == size-1){
+                E toReturn = tail.value;
+                tail.value = toChange;
+                return toReturn;
+            }
+
+            else{
+
+                Node<E> current;
+            //to remove all other elements
+            if (index < size / 2) {
+                current = head;
+                for (int i = 0; i < index; i++) {
+                    current = current.next;
+                }
+            } else {
+                current = tail;
+                for (int i = size - 1; i > index; i--) {
+                    current = current.previous;
+                }
+            }
+
+            E toReturn = current.value;
+            current.value = toChange;
+            return toReturn;      
+    }
+        
+        
+        
+        
 
     }
 
@@ -242,38 +308,98 @@ public class MyDLL<E> implements ListADT<E>,Iterator<Node> {
 
     @Override
     public boolean contains(E toFind) throws NullPointerException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        //we must add a check for null reference calls, IN JAVA you cannnot make a function call on  a null refernce.
+        Node current = head;
+        for(int i = 0; i < size; i++){
+            if(current.value == null && toFind == null){
+            return true;
+            }
+            if(current.value.equals(toFind)){
+                return true;
+            }
+            current = current.next;
+        }
+        return false;
+
     }
 
     @Override
     public E[] toArray(E[] toHold) throws NullPointerException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (toHold == null) {
+            throw new NullPointerException("The provided array cannot be null");
+        }
+        
+        
+        if (toHold.length < size) {
+            E[] newArray =(E[]) new Object[size];
+            Node<E> current = head;
+            for(int i=0; i < newArray.length; i++){
+                newArray[i] = current.value;
+                current = current.next;
+            }
+            return newArray;
+            
+        }
+        
+        
+        
+        Node<E> current = head;
+        for (int i = 0; i < size; i++) {
+            toHold[i] = current.value;
+            current = current.next;
+        }
+        
+        return toHold;
+
     }
 
     @Override
     public Object[] toArray() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        
+        Object[] array = new Object[size];
+        Node<E> current = head;
+        for (int i = 0; i < size; i++) {
+            array[i] = current.value;
+            current = current.next;
+        }
+        return array;
+        
+
+
+
     }
 
     @Override
     public Iterator<E> iterator() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Object[] array1 = toArray();
+        
+        GenericIterator iterator = new GenericIterator(array1);
+        return iterator;
+
+
     }
 
-    @Override
-    public E remove(E toRemove) throws NullPointerException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+    // I actually dont think we need these two methods or to implment the Iterator class, should be set up as an internal class 
     @Override
     public boolean hasNext() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       return iterator().hasNext();
+
     }
 
+    
+    // not sure why this wont let me return type E like ArrayList
     @Override
     public Node next() throws NoSuchElementException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+           
+            
+        return null;
+           
+            
     }
+            
 
- 
+    
+//end of class
 }
