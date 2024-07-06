@@ -21,8 +21,8 @@ public class Node<E> {
 
     public Node(E value, Node<E> next, Node<E> previous) {
         this.value = value;
-        this.next = null;
-        this.previous = null;
+        this.next = next;
+        this.previous = previous;
     }
 
    

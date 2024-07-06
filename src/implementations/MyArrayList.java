@@ -236,7 +236,7 @@ public class MyArrayList<E> implements ListADT<E>,Iterator<E> {
         */
         
         
-        
+        //if To hold is not big enough create a new array and set to size of MyArrayList and return that instead
         // generic type arrays cannot be created so cheat by casting to generic from object array
         E[] newArray =(E[]) new Object[capacity];
         
@@ -265,7 +265,6 @@ public class MyArrayList<E> implements ListADT<E>,Iterator<E> {
     
     @Override
         public boolean hasNext() {
-            
             int index = 0;
             return index < data.length;
         }
