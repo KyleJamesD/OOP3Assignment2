@@ -1,4 +1,4 @@
-package utilities;
+package src.datastructures;
 
 /**
  * The QueueADT interface is designed to be used for a linear first-in-first-out (FIFO) sequence of
