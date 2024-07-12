@@ -29,16 +29,20 @@ public class MyDLL<E extends MyDLLNode<E>> implements ListADT<E>{
         if (index < 0 || index > size) throw new IndexOutOfBoundsException();
         if (toAdd == null) throw new NullPointerException();
         if (index == 0){
-            add(toAdd);
+            toAdd.next = head;
+            head.prev = toAdd;
+            head = toAdd;
         }
         else if (index == size){
             tail.next = toAdd;
+            toAdd.prev = tail;
             tail = toAdd;
         }
         else {
             MyDLLNode<E> previousNode = get(index - 1);
             MyDLLNode<E> tempNode = previousNode.next;
             previousNode.next = toAdd;
+            toAdd.prev = previousNode;
             toAdd.next = tempNode;
         }
         size++;
@@ -53,6 +57,7 @@ public class MyDLL<E extends MyDLLNode<E>> implements ListADT<E>{
         }
         else {
             tail.next = toAdd;
+            toAdd.prev = tail;
             tail = toAdd;
         }
         size++;
@@ -83,35 +88,58 @@ public class MyDLL<E extends MyDLLNode<E>> implements ListADT<E>{
     @Override
     public E remove(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index > size) throw new IndexOutOfBoundsException();
-        MyDLLNode<E> previousNode = get(index - 1);
-        MyDLLNode<E> tempNode = previousNode.next;
-        previousNode.next = previousNode.next.next;
-        size--;
-        return (E)tempNode;
-    }
-
-    @Override
-    public E remove(E toRemove) throws NullPointerException {
-        if (toRemove == null) throw new NullPointerException();
-        Iterator<E> iterator = new MyDLLIterator();
-        MyDLLNode<E> node = null;
-        while (iterator.hasNext()){
-            node = iterator.next();
-            if (toRemove.equals(node.data)){
-                MyDLLNode<E> tempNode = node.next;
-                node.next = tempNode.next;
-            }
+        MyDLLNode<E> node = get(index);
+        if (size == 1){
+            head = tail = null;
+        }
+        else if (index == 0){
+            head.next.prev = null;
+            head = head.next;
+        }
+        else if (index == size-1){
+            tail.prev.next = null;
+            tail = tail.prev;
+        }
+        else {
+            MyDLLNode<E> previousNode = get(index - 1);
+            node = previousNode.next;
+            previousNode.next = previousNode.next.next;
         }
         size--;
         return (E) node;
     }
 
     @Override
+    public E remove(E toRemove) throws NullPointerException {
+        if (toRemove == null) throw new NullPointerException();
+        if (size == 1){
+            head = tail = null;
+        }
+        else {
+            Iterator<E> iterator = new MyDLLIterator();
+            MyDLLNode<E> node = null;
+            while (iterator.hasNext()){
+                node = iterator.next();
+                if (toRemove.equals(node.data)){
+                    MyDLLNode<E> tempNode = node.next;
+                    node.next = tempNode.next;
+                }
+            }
+        }
+        size--;
+        return toRemove;
+    }
+
+    @Override
     public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException {
         if (index < 0 || index > size) throw new IndexOutOfBoundsException();
         if (toChange == null) throw new NullPointerException();
-        MyDLLNode<E> node = get(index -1 );
+        MyDLLNode<E> node = get(index -1);
+        MyDLLNode<E> tempNode = node.next;
         node.next = toChange;
+        toChange.prev = node;
+        tempNode.prev = toChange;
+        toChange.next = tempNode;
         return toChange;
     }
 
@@ -166,8 +194,6 @@ public class MyDLL<E extends MyDLLNode<E>> implements ListADT<E>{
     private class MyDLLIterator implements Iterator<E>{
         private MyDLL myDLL;
         private MyDLLNode currentNode;
-        private int index = 0;
-        boolean atStart;
 
         @Override
         public boolean hasNext() {
