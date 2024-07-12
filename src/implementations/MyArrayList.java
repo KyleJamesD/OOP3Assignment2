@@ -13,7 +13,7 @@ import utilities.ListADT;
  *
  * @author kyled
  */
-public class MyArrayList<E> implements ListADT<E>,Iterator<E> {
+public class MyArrayList<E> implements ListADT<E> {
     
 
     //size is the current element count of the list, when new list is created this will always be zero
@@ -252,7 +252,60 @@ public class MyArrayList<E> implements ListADT<E>,Iterator<E> {
         return Arrays.copyOf(data,size);
 
     }
+    
+    
+    
+    
+    
+    @Override
+    public Iterator<E> iterator() {
+        return new MyArrayListIterator();
+    }
+    
+    
+    
 
+    
+    
+    private class MyArrayListIterator implements Iterator<E>{
+
+        private int index = 0;
+
+        @Override
+        public boolean hasNext() {
+            return index < size;
+        }
+
+        @Override
+        public E next() throws NoSuchElementException {
+            if (!hasNext()) throw new NoSuchElementException();
+            return data[index++];
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*   ************************OLD METHOD****************************
     @Override
     public Iterator<E> iterator() {
         
@@ -260,8 +313,12 @@ public class MyArrayList<E> implements ListADT<E>,Iterator<E> {
         return iterator;
         
     }
+    
+    */
 
     
+    
+    /*
     //is this correct??
     @Override
         public boolean hasNext() {
@@ -283,14 +340,18 @@ public class MyArrayList<E> implements ListADT<E>,Iterator<E> {
 
         }
         
-        
+        */
 
  
 
   
 
     
-    
+
+        
+        
+        
+        //end of class 
 }
 
 

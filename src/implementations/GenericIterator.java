@@ -11,6 +11,10 @@ import utilities.Iterator;
  *
  * @author kyled
  */
+
+
+
+//WE DO NOT USE THIS IN OUR PROGRAM, IMPLEMENTATED A DIFFERENT METHOD
 public class GenericIterator<E> implements Iterator<E> {
     public  E[] data;
     private int index = 0;
