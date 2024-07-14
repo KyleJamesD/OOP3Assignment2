@@ -3,17 +3,16 @@ package test;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import src.utilities.MyArrayList;
+import src.utilities.MyDLL;
 
 import static org.junit.Assert.*;
 
-public class MyArrayListTest {
+public class MyDLLTest {
 
-    MyArrayList<Integer> list;
-
+    MyDLL<Integer> list;
     @Before
     public void setUp() throws Exception {
-        list = new MyArrayList<>();
+        list = new MyDLL<>();
         list.add(1);
     }
 
@@ -46,10 +45,10 @@ public class MyArrayListTest {
 
     @Test
     public void addAll() {
-        list.addAll(list);
+        MyDLL<Integer> list2 = new MyDLL<>();
+        list2.add(2);
+        list.addAll(list2);
         assertEquals(2, list.size());
-
-
     }
 
     @Test
@@ -60,13 +59,13 @@ public class MyArrayListTest {
     @Test
     public void remove() {
         assertEquals(1, list.remove(0).intValue());
+        assertEquals(0, list.size());
     }
 
     @Test
     public void testRemove() {
-        list.remove(Integer.valueOf(1));
+        assertEquals(1,list.remove(Integer.valueOf(1)).intValue());
         assertEquals(0, list.size());
-
     }
 
     @Test
@@ -87,15 +86,17 @@ public class MyArrayListTest {
 
     @Test
     public void toArray() {
-        Object[] array = list.toArray();
-        assertEquals(1, array.length);
+        Object[] arr = list.toArray();
+        assertEquals(1, arr.length);
+        assertEquals(1, arr[0]);
     }
 
     @Test
     public void testToArray() {
-        Integer[] array = new Integer[1];
-        array = list.toArray(array);
-        assertEquals(1, array.length);
+        Integer[] arr = new Integer[1];
+        arr = list.toArray(arr);
+        assertEquals(1, arr.length);
+        assertEquals(1, arr[0].intValue());
     }
 
     @Test
