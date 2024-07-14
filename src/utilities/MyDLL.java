@@ -3,6 +3,7 @@ package src.utilities;
 import org.w3c.dom.Node;
 import src.ListADT;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class MyDLL<E> implements ListADT<E> {
@@ -74,6 +75,7 @@ public class MyDLL<E> implements ListADT<E> {
         }
         tail.next = newNode;
         newNode.prev = tail;
+        tail = newNode;
         size++;
         return true;
     }
@@ -196,7 +198,7 @@ public class MyDLL<E> implements ListADT<E> {
             throw new NullPointerException("The array to hold is null");
         }
         if (toHold.length < size) {
-            toHold = (E[]) new Object[size];
+            toHold = Arrays.copyOf(toHold, size);
         }
         Iterator<E> iterator = iterator();
         int index = 0;
@@ -242,7 +244,7 @@ public class MyDLL<E> implements ListADT<E> {
     }
 
 
-    private static class MyDLLNode<E> {
+    public static class MyDLLNode<E> {
         MyDLLNode<E> prev;
         E element;
         MyDLLNode<E> next;
