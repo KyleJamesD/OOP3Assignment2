@@ -15,6 +15,7 @@ public class MyArrayListTest {
     public void setUp() throws Exception {
         list = new MyArrayList<>();
         list.add(1);
+        list.add(2);
     }
 
     @After
@@ -23,7 +24,7 @@ public class MyArrayListTest {
 
     @Test
     public void size() {
-        assertEquals(1, list.size());
+        assertEquals(2, list.size());
     }
 
     @Test
@@ -34,8 +35,8 @@ public class MyArrayListTest {
 
     @Test
     public void add() {
-        list.add(2);
-        assertEquals(2, list.size());
+        list.add(3);
+        assertEquals(3, list.size());
     }
 
     @Test
@@ -47,7 +48,7 @@ public class MyArrayListTest {
     @Test
     public void addAll() {
         list.addAll(list);
-        assertEquals(2, list.size());
+        assertEquals(4, list.size());
 
 
     }
@@ -65,7 +66,7 @@ public class MyArrayListTest {
     @Test
     public void testRemove() {
         list.remove(Integer.valueOf(1));
-        assertEquals(0, list.size());
+        assertEquals(1, list.size());
 
     }
 
@@ -88,14 +89,14 @@ public class MyArrayListTest {
     @Test
     public void toArray() {
         Object[] array = list.toArray();
-        assertEquals(1, array.length);
+        assertEquals(2, array.length);
     }
 
     @Test
     public void testToArray() {
         Integer[] array = new Integer[1];
         array = list.toArray(array);
-        assertEquals(1, array.length);
+        assertEquals(2, array.length);
     }
 
     @Test

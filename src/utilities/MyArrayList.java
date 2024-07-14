@@ -151,7 +151,7 @@ public class MyArrayList<E> implements ListADT<E> {
             throw new NullPointerException();
         }
         if (toHold.length < size) {
-            return (E[]) Arrays.copyOf(elenments, size);
+            return Arrays.copyOf(elenments, size, (Class<? extends E[]>) toHold.getClass());
         }
         System.arraycopy(elenments, 0, toHold, 0, size);
         return toHold;
