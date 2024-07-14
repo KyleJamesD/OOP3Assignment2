@@ -123,7 +123,7 @@ public class MyArrayList<E> implements ListADT<E> {
 
     @Override
     public Object[] toArray() {
-        return toArray(array);
+        return Arrays.copyOf(array, size);
     }
 
     @Override
