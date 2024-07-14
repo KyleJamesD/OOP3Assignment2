@@ -129,7 +129,7 @@ public class MyArrayList<E> implements ListADT<E> {
 
     @Override
     public boolean isEmpty() {
-        return elenments == null || elenments.length == 0 ;
+        return size == 0 ;
     }
 
     @Override
