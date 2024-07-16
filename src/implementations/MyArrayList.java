@@ -21,7 +21,12 @@ public class MyArrayList<E> implements ListADT<E> {
     //capacity is the total amount of elements the list can hold, default is 10.
     public int capacity = 10;
     //The underlying Data structure to store the elements in this list, a Regular Array.
-    E[] data;
+    public E[] data;
+
+    public MyArrayList() {
+        data = (E[]) new Object[capacity];
+        size = 0;
+    }
     
   
 
@@ -34,8 +39,11 @@ public class MyArrayList<E> implements ListADT<E> {
 
     public MyArrayList(int capacity, E[] data) {
         this.capacity = capacity;
-        this.size = data.length;
-        
+        this.data = (E[])new Object[capacity];
+        setData(data);
+    }
+    
+    public MyArrayList(E[] data) {
         this.data = (E[])new Object[capacity];
         setData(data);
     }
@@ -44,9 +52,11 @@ public class MyArrayList<E> implements ListADT<E> {
     //if an array is passed this method will parse the Array into our new Array
     
     public final void setData(E[] data) {
-        for(int i = 0; i <size; i++)
+        for(int i = 0; i < data.length; i++)
+            if (data[i] != null) {
             this.data[i] = data[i];
-        this.size = data.length;
+            this.size++;
+            }
     }
     
     
@@ -81,7 +91,7 @@ public class MyArrayList<E> implements ListADT<E> {
         }
         else{
         for (int i = size-1; i>=index; i--)
-            data[i+1] = data[i];
+        {data[i+1] = data[i];}
           
         data[index] = toAdd;
         size++;
@@ -112,6 +122,11 @@ public class MyArrayList<E> implements ListADT<E> {
         
         //they both have a function with the same name because they both implement ListADT
         //toAdd has its own implementation of iterator().
+        
+        // NEED TO CHANGE SO THAT A NEW BIGGGER ARRAY IS CREATED IF NOT ENOUGH ROOM
+        if (size + toAdd.size() > capacity)
+        {return false;}
+        
         Iterator<? extends E> iterator = toAdd.iterator();
         while (iterator.hasNext()) {
             E element = iterator.next();
@@ -238,6 +253,8 @@ public class MyArrayList<E> implements ListADT<E> {
         
         //if To hold is not big enough create a new array and set to size of MyArrayList and return that instead
         // generic type arrays cannot be created so cheat by casting to generic from object array
+        
+        //.lenght RETURNS HOW MANY OBJECTS THE ARRRAY CAN HOLD NOT HOW MANY ELEMENTS ARE IN THE ARRAY
         E[] newArray =(E[]) new Object[capacity];
         
         for(int i=0; i < newArray.length; i++){
