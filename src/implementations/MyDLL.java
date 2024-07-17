@@ -13,7 +13,7 @@ import utilities.ListADT;
  *
  * @author kyled
  */
-public class MyDLL<E> implements ListADT<E>,Iterator<Node> {
+public class MyDLL<E> implements ListADT<E> {
 
     
     private Node<E> head;
@@ -370,6 +370,38 @@ public class MyDLL<E> implements ListADT<E>,Iterator<Node> {
 
 
     }
+    
+    @Override
+    public Iterator<E> iterator() {
+        return new MyDLLIterator();
+    }
+
+    private class MyDLLIterator implements Iterator<E> {
+        private Node<E> current = head;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public E next() {
+            E element = current.value;
+            current = current.next;
+            return element;
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /* old method 
 
     @Override
     public Iterator<E> iterator() {
@@ -399,7 +431,7 @@ public class MyDLL<E> implements ListADT<E>,Iterator<Node> {
             
     }
             
-
+*/
     
 //end of class
 }

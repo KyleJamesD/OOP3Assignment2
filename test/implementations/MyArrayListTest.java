@@ -25,7 +25,6 @@ public class MyArrayListTest {
      */
     @Test
     public void testSize() {
-        System.out.println("size");
         int capacity = 10;
         Double data[] = new Double[10];
         data[0] = 6.0;
@@ -34,11 +33,10 @@ public class MyArrayListTest {
         int result = instance.size();
         assertEquals(expResult, result);
     }
+    
     /**
      * Test of clear method, of class ListADT.
-     */
-    
-    
+     */ 
     @Test
     public void testClear() {
         int capacity = 10;
