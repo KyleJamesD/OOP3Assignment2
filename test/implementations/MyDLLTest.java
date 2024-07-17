@@ -24,12 +24,12 @@ public class MyDLLTest {
     @Before
     public void setUp() {
         MyDLLTest = new MyDLL<>();
-        MyDLLTest.add(0, new Node<>(1));
-        MyDLLTest.add(1, new Node<>(2.0));
-        MyDLLTest.add(2, new Node<>("Three"));
-        MyDLLTest.add(3, new Node<>("4"));
-        MyDLLTest.add(4, new Node<>(5));
-        MyDLLTest.add(5, new Node<>(6));
+        MyDLLTest.add(0,1);
+        MyDLLTest.add(1,2.0);
+        MyDLLTest.add(2,"three");
+        MyDLLTest.add(3,"4");
+        MyDLLTest.add(4,5);
+        MyDLLTest.add(5,6);
  
     }
 
@@ -62,12 +62,30 @@ public class MyDLLTest {
     @Test
     public void testAdd_int_GenericType() {
         
-        MyDLLTest.add(5, new Node<>(6));
+        MyDLLTest.add(5,6.5);
         int expResult = 7;
         int result = MyDLLTest.size();
         assertEquals(expResult, result);
         
-        //TO DO : add check with get to see if nodes have shifted
+        
+        var result2 = MyDLLTest.get(5);
+        var expResult2 = 6.5;
+        assertEquals(expResult2,result2);
+        
+        MyDLLTest.add(5,22.5);
+        var result3 = MyDLLTest.get(5);
+        var expResult3 = 22.5;
+        assertEquals(expResult3,result3);
+        
+        
+        var result25 = MyDLLTest.get(6);
+        var expResult25 = 6.5;
+        assertEquals(expResult25,result25);
+        
+        
+        int expResult4 = 8;
+        int result4 = MyDLLTest.size();
+        assertEquals(expResult4, result4);
         
     }
 
@@ -78,12 +96,13 @@ public class MyDLLTest {
     public void testAdd_GenericType() {
         
         
-        MyDLLTest.add(new Node<>(7.0));
-        int expResult = 7;
-        int result = MyDLLTest.size();
+        MyDLLTest.add("this will be at the tail");
+        String expResult = "this will be at the tail";
+        int size = MyDLLTest.size();
+        var result = MyDLLTest.get(size -1);
         assertEquals(expResult, result);
-        
-        
+        System.out.println(result);
+    
         
     }
 
@@ -92,14 +111,20 @@ public class MyDLLTest {
      */
     @Test
     public void testAddAll() {
-        System.out.println("addAll");
-        ListADT toAdd = null;
-        MyDLL instance = new MyDLL();
-        boolean expResult = false;
-        boolean result = instance.addAll(toAdd);
+        int capacity = 10;
+        Double data1[] = new Double[10];
+        data1[0] = 6.0;
+        data1[1] = 7.0;
+        data1[2] = 8.0;
+        data1[3] = 9.0;
+        ListADT<Double> instance = new MyArrayList<>(capacity, data1);
+        
+        MyDLLTest.addAll(instance);
+        int expResult = 10;
+        int result = MyDLLTest.size();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        
     }
 
     /**
@@ -107,14 +132,11 @@ public class MyDLLTest {
      */
     @Test
     public void testGet() {
-        System.out.println("get");
-        int index = 0;
-        MyDLL instance = new MyDLL();
-        Object expResult = null;
-        Object result = instance.get(index);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        var result = MyDLLTest.get(5);
+        int expResult = 6;
+        assertEquals(expResult,result);
+        
+        
     }
 
     /**
@@ -122,14 +144,17 @@ public class MyDLLTest {
      */
     @Test
     public void testRemove_int() {
-        System.out.println("remove");
-        int index = 0;
-        MyDLL instance = new MyDLL();
-        Object expResult = null;
-        Object result = instance.remove(index);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        var result = MyDLLTest.get(2);
+        String expResult = "three";
+        assertEquals(expResult,result);
+        
+        
+        MyDLLTest.remove(2);
+        
+        var result2 = MyDLLTest.get(2);
+        String expResult2 = "4";
+        assertEquals(expResult2,result2);
+ 
     }
 
     /**
@@ -137,14 +162,12 @@ public class MyDLLTest {
      */
     @Test
     public void testRemove_GenericType() {
-        System.out.println("remove");
-        Object toRemove = null;
-        MyDLL instance = new MyDLL();
-        Object expResult = null;
-        Object result = instance.remove(toRemove);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        
+        Object removedNode;
+        removedNode = MyDLLTest.remove("three");
+        System.out.println("This is the value of the removed Node:" + removedNode);
+        
     }
 
     /**
@@ -152,15 +175,15 @@ public class MyDLLTest {
      */
     @Test
     public void testSet() {
-        System.out.println("set");
-        int index = 0;
-        Object toChange = null;
-        MyDLL instance = new MyDLL();
-        Object expResult = null;
-        Object result = instance.set(index, toChange);
+        
+        var result = MyDLLTest.set(0, "one");
+        int expResult = 1;
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        var result2 = MyDLLTest.get(0);
+        String expResult2 = "one";
+        assertEquals(expResult2, result2);
+        
     }
 
     /**
@@ -168,13 +191,15 @@ public class MyDLLTest {
      */
     @Test
     public void testIsEmpty() {
-        System.out.println("isEmpty");
-        MyDLL instance = new MyDLL();
-        boolean expResult = false;
-        boolean result = instance.isEmpty();
+        
+        
+        int expResult = 6;
+        int result = MyDLLTest.size();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        MyDLLTest.clear();
+        int expResult2 = 0;
+        int result2 = MyDLLTest.size();
+        assertEquals(expResult2, result2);
     }
 
     /**

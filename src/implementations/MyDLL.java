@@ -155,11 +155,13 @@ public class MyDLL<E> implements ListADT<E> {
             for (int i = 0; i < index; i++) {
                 current = current.next;
             }
+            return current.value;
         } else {
             current = tail;
             for (int i = size - 1; i > index; i--) {
                 current = current.previous;
             }
+            
         }
 
         return current.value;
