@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 import utilities.Iterator;
 import utilities.ListADT;
 import implementations.MyArrayList;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -210,15 +211,25 @@ public class MyArrayListTest {
      */
     @Test
     public void testSet() {
-        System.out.println("set");
-        int index = 0;
-        Object toChange = null;
-        ListADT instance = new ListADTImpl();
-        Object expResult = null;
-        Object result = instance.set(index, toChange);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int capacity = 10;
+        Double data1[] = new Double[10];
+        data1[0] = 6.0;
+        data1[1] = 7.0;
+        data1[2] = 8.0;
+        data1[3] = 9.0;
+        data1[4] = 8.0;
+        ListADT<Double> instance = new MyArrayList<>(capacity, data1);
+        
+        
+        int index = 1;
+        Double toSet = 22.0;
+        Double toCheck = 7.0;
+        Double result = instance.set(index, toSet);
+        assertEquals(result, toCheck);
+        assertEquals(instance.get(0), data1[0]);
+        assertEquals(instance.get(1), toSet);
+        assertEquals(instance.get(2), data1[2]);
+        
     }
 
     /**
@@ -226,13 +237,18 @@ public class MyArrayListTest {
      */
     @Test
     public void testIsEmpty() {
-        System.out.println("isEmpty");
-        ListADT instance = new ListADTImpl();
-        boolean expResult = false;
-        boolean result = instance.isEmpty();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        Double data1[] = new Double[10];
+         ListADT<Double> instance = new MyArrayList<>(data1);
+         boolean istrue = true;
+         boolean isfalse = false;
+         
+         assertEquals(instance.isEmpty(), istrue);
+         
+         Double makefalse = 3.0;
+         instance.add(makefalse);
+         assertEquals(instance.isEmpty(), isfalse);
+         
     }
 
     /**
@@ -240,14 +256,45 @@ public class MyArrayListTest {
      */
     @Test
     public void testContains() {
-        System.out.println("contains");
-        Object toFind = null;
-        ListADT instance = new ListADTImpl();
-        boolean expResult = false;
-        boolean result = instance.contains(toFind);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int capacity = 10;
+        Object data1[] = new Object[10];
+        
+        Boolean booleanObjecttrue = true;
+        data1[0] = (Double)6.0;
+        data1[1] = (Integer)7;
+        data1[2] = "Hello World";
+        data1[3] = booleanObjecttrue;
+        data1[4] = null;
+        MyArrayList instance = new MyArrayList<>(capacity, data1);
+        
+        Double var1 = 6.0;
+        Integer var2 = 7;
+        String var3 = "Hello World";
+        Boolean var4 = true;
+        String var5 = null;
+        
+        boolean istrue = true;
+         boolean isfalse = false;
+        
+        assertEquals(instance.contains(var1),istrue);
+        assertEquals(instance.contains(var2),istrue);
+        assertEquals(instance.contains(var3),istrue);
+        assertEquals(instance.contains(var4),istrue);
+        //assertEquals(instance.contains(var5),istrue);
+        
+        
+        Double var6 = 6.01;
+        Integer var7 = 77;
+        String var8 = "Hello world1";
+        Boolean var9 = false;
+        
+        assertEquals(instance.contains(var6),isfalse);
+        assertEquals(instance.contains(var7),isfalse);
+        assertEquals(instance.contains(var8),isfalse);
+        assertEquals(instance.contains(var9),isfalse);
+        
+        
+        
     }
 
     /**
@@ -255,14 +302,47 @@ public class MyArrayListTest {
      */
     @Test
     public void testToArray_GenericType() {
-        System.out.println("toArray");
-        Object[] toHold = null;
-        ListADT instance = new ListADTImpl();
-        Object[] expResult = null;
-        Object[] result = instance.toArray(toHold);
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int capacity = 10;
+        Object data1[] = new Object[10];
+        
+        Boolean booleanObjecttrue = true;
+        data1[0] = (Double)6.0;
+        data1[1] = (Integer)7;
+        data1[2] = "Hello World";
+        data1[3] = booleanObjecttrue;
+        data1[4] = null;
+        MyArrayList instance = new MyArrayList<>(capacity, data1);
+        
+        
+        Object data2[] = new Object[3];
+        Object newdata2[] =  instance.toArray(data2);
+        assertEquals(data1[0],newdata2[0]);
+        assertEquals(data1[1],newdata2[1]);
+        assertEquals(data1[2],newdata2[2]);
+        assertEquals(data1[3],newdata2[3]);
+        assertEquals(data1[4],newdata2[4]);
+        
+        
+        
+        
+        Object data3[] = new Object[10];
+        Object newdata3[] =  instance.toArray(data3);
+        assertEquals(data1[0],newdata3[0]);
+        assertEquals(data1[1],newdata3[1]);
+        assertEquals(data1[2],newdata3[2]);
+        assertEquals(data1[3],newdata3[3]);
+        assertEquals(data1[4],newdata2[4]);
+        
+        
+        Object newArray[] = instance.toArray();
+        assertEquals(data1[0],newArray[0]);
+        assertEquals(data1[1],newArray[1]);
+        assertEquals(data1[2],newArray[2]);
+        assertEquals(data1[3],newArray[3]);
+        //assertEquals(data1[4],newArray[4]);
+       
+        
+        
     }
 
     /**
@@ -270,13 +350,24 @@ public class MyArrayListTest {
      */
     @Test
     public void testToArray_0args() {
-        System.out.println("toArray");
-        ListADT instance = new ListADTImpl();
-        Object[] expResult = null;
-        Object[] result = instance.toArray();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        int capacity = 10;
+        Object data1[] = new Object[10];
+        
+        Boolean booleanObjecttrue = true;
+        data1[0] = (Double)6.0;
+        data1[1] = (Integer)7;
+        data1[2] = "Hello World";
+        data1[3] = booleanObjecttrue;
+        data1[4] = null;
+        MyArrayList instance = new MyArrayList<>(capacity, data1);
+
+        Object newArray[] = instance.toArray();
+        assertEquals(data1[0],newArray[0]);
+        assertEquals(data1[1],newArray[1]);
+        assertEquals(data1[2],newArray[2]);
+        assertEquals(data1[3],newArray[3]);
+        //assertEquals(data1[4],newArray[4]);
     }
 
     /**
@@ -284,13 +375,30 @@ public class MyArrayListTest {
      */
     @Test
     public void testIterator() {
-        System.out.println("iterator");
-        ListADT instance = new ListADTImpl();
-        Iterator expResult = null;
-        Iterator result = instance.iterator();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        
+        int capacity = 10;
+        Object data1[] = new Object[10];
+        
+        Boolean booleanObjecttrue = true;
+        data1[0] = (Double)6.0;
+        data1[1] = (Integer)7;
+        data1[2] = "Hello World";
+        data1[3] = booleanObjecttrue;
+        MyArrayList instance = new MyArrayList<>(capacity, data1);
+           
+        Iterator<Object> iterator = instance.iterator();
+        assertTrue(iterator.hasNext());
+        assertEquals(6.0, iterator.next());
+        assertEquals(7, iterator.next());
+        assertEquals("Hello World", iterator.next());
+        assertEquals(booleanObjecttrue, iterator.next());
+        assertThrows(NoSuchElementException.class,() -> iterator.next());
+
+        assertFalse(iterator.hasNext());
+        
+        
+        
     }
 
 
