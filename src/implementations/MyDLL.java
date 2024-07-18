@@ -334,12 +334,14 @@ public class MyDLL<E> implements ListADT<E> {
         
         
         if (toHold.length < size) {
-            E[] newArray =(E[]) new Object[size];
+            E[] newArray = (E[]) new Object[size];
             Node<E> current = head;
             for(int i=0; i < newArray.length; i++){
                 newArray[i] = current.value;
                 current = current.next;
             }
+            
+            
             return newArray;
             
         }

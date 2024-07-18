@@ -207,14 +207,11 @@ public class MyDLLTest {
      */
     @Test
     public void testContains() {
-        System.out.println("contains");
-        Object toFind = null;
-        MyDLL instance = new MyDLL();
-        boolean expResult = false;
-        boolean result = instance.contains(toFind);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
+        
+        assertTrue(MyDLLTest.contains(1));
+        System.out.println("the return of contains() for Int 1 is: " + MyDLLTest.contains(1));
+        
     }
 
     /**
@@ -222,14 +219,22 @@ public class MyDLLTest {
      */
     @Test
     public void testToArray_GenericType() {
-        System.out.println("toArray");
-        Object[] toHold = null;
-        MyDLL instance = new MyDLL();
-        Object[] expResult = null;
-        Object[] result = instance.toArray(toHold);
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        
+        
+        Object newArray[] = new Object[10];
+        
+        MyDLLTest.toArray(newArray);
+        
+        
+        assertEquals(MyDLLTest.get(0),newArray[0]);
+        assertEquals(MyDLLTest.get(1),newArray[1]);
+        assertEquals(MyDLLTest.get(2),newArray[2]);
+        assertEquals(MyDLLTest.get(3),newArray[3]);
+        assertEquals(MyDLLTest.get(4),newArray[4]);
+        assertEquals(MyDLLTest.get(5),newArray[5]);
+        
+        
     }
 
     /**
@@ -237,13 +242,16 @@ public class MyDLLTest {
      */
     @Test
     public void testToArray_0args() {
-        System.out.println("toArray");
-        MyDLL instance = new MyDLL();
-        Object[] expResult = null;
-        Object[] result = instance.toArray();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Object newArray[] = MyDLLTest.toArray();
+        
+        assertEquals(MyDLLTest.get(0),newArray[0]);
+        assertEquals(MyDLLTest.get(1),newArray[1]);
+        assertEquals(MyDLLTest.get(2),newArray[2]);
+        assertEquals(MyDLLTest.get(3),newArray[3]);
+        assertEquals(MyDLLTest.get(4),newArray[4]);
+        assertEquals(MyDLLTest.get(5),newArray[5]);
+        
+        
     }
 
     /**
@@ -251,41 +259,17 @@ public class MyDLLTest {
      */
     @Test
     public void testIterator() {
-        System.out.println("iterator");
-        MyDLL instance = new MyDLL();
-        Iterator expResult = null;
-        Iterator result = instance.iterator();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        
+        Iterator<Object> iterator = MyDLLTest.iterator();
+        assertTrue(iterator.hasNext());
+        assertEquals(1, iterator.next());
+        assertEquals(2.0, iterator.next());
+        assertEquals("three", iterator.next());
+        
+        
+      
     }
 
-    /**
-     * Test of hasNext method, of class MyDLL.
-     */
-    @Test
-    public void testHasNext() {
-        System.out.println("hasNext");
-        MyDLL instance = new MyDLL();
-        boolean expResult = false;
-        boolean result = instance.hasNext();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of next method, of class MyDLL.
-     */
-    @Test
-    public void testNext() {
-        System.out.println("next");
-        MyDLL instance = new MyDLL();
-        Node expResult = null;
-        Node result = instance.next();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
     
 }
