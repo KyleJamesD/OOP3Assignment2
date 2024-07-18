@@ -16,11 +16,11 @@ import utilities.StackADT;
 
 public class MyStack<E extends MyArrayList<E>> implements StackADT<E>{
 
-    private final MyArrayList<E> list;
-    private final int size;
+    private final MyArrayList<E> stackArray;
+    public int size;
 
     public MyStack() {
-        list = new MyArrayList<E>();
+        stackArray = new MyArrayList<E>();
         size = 0;
     }
 
@@ -30,55 +30,68 @@ public class MyStack<E extends MyArrayList<E>> implements StackADT<E>{
         throw new NullPointerException();}
         
         
-        list.add(0, toAdd);
+        stackArray.add(size,toAdd);
+        size++;
     }
 
     @Override
     public E pop() throws EmptyStackException {
         if (size == 0) throw new EmptyStackException();
-        MyArrayList<E> temp = list;
-        if (size == 1) return list.remove(0);
-        else return list.remove(size-1);
+        
+        if (size == 1) {
+        size--;
+        return stackArray.remove(0);
+        }
+        
+        
+        else{
+            int index = size;
+            size--;
+            //can this also be achieved with return stackArray.remove(size--);
+            return stackArray.remove(index-1);
+        }
+        
+        
     }
 
     @Override
     public E peek() throws EmptyStackException {
         if (size == 0) throw new EmptyStackException();
-        return list.get(1);
+        return stackArray.get(size-1);
     }
 
     @Override
     public void clear() {
-        list.clear();
+        stackArray.clear();
     }
 
     @Override
     public boolean isEmpty() {
-        return list.isEmpty();
+        return stackArray.isEmpty();
     }
 
     @Override
     public Object[] toArray() {
-        return list.toArray();
+        return stackArray.toArray();
     }
 
     @Override
     public E[] toArray(E[] holder) throws NullPointerException {
-        return list.toArray(holder);
+        return stackArray.toArray(holder);
     }
 
     @Override
     public boolean contains(E toFind) throws NullPointerException {
-        return list.contains(toFind);
+        return stackArray.contains(toFind);
     }
 
     @Override
     public int search(E toFind) {
-        Iterator<E> it = list.iterator();
+        Iterator<E> it = stackArray.iterator();
         int index = 0;
         while (it.hasNext()) {
             if (it.next().equals(toFind)) {
-                return list.size()-index;
+                return index;
             }
             index++;
         }
@@ -87,17 +100,38 @@ public class MyStack<E extends MyArrayList<E>> implements StackADT<E>{
 
     @Override
     public Iterator<E> iterator() {
-        return list.iterator();
+        return stackArray.iterator();
     }
 
     @Override
     public boolean equals(StackADT<E> that) {
-        if (that == this) return true;
-        return false;
+        Iterator<E> thisIterator = this.iterator();
+        Iterator<?> thatIterator = that.iterator();
+        
+       
+        boolean x = false;
+        
+        if(this.size != that.size())
+        {return false;}
+        
+       
+        
+        while(thisIterator.hasNext() && thatIterator.hasNext())
+        {
+            if(thisIterator.next().equals(thatIterator.next()))
+            {
+            x = true;
+
+            }
+            else 
+            {return false;}
+        }
+        return x;   
+        
     }
 
     @Override
     public int size() {
-        return list.size();
+        return stackArray.size();
     }
 }
