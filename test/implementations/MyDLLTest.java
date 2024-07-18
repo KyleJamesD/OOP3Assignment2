@@ -267,8 +267,6 @@ public class MyDLLTest {
         assertEquals(2.0, iterator.next());
         assertEquals("three", iterator.next());
         
-        
-      
     }
 
     
