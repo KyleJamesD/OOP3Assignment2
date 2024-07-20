@@ -52,10 +52,15 @@ public class StackADTTest {
     @Test
     public void testPop() {
         instance.push(1.0);
+        instance.push(2.0);
+        instance.push(3.0);
+        instance.push(4.0);
         
         Object expectedresult = instance.pop();
-        assertEquals(1.0,expectedresult);
-        
+        assertEquals(4.0,expectedresult);
+        instance.pop();
+        instance.pop();
+        instance.pop();
         //instance.push(1.0);
         Object isEmpty = instance.isEmpty();
         assertEquals(true,isEmpty);
@@ -66,8 +71,8 @@ public class StackADTTest {
      */
     @Test
     public void testPeek() {
-       // instance.push(1.0);
-        //instance.push(2.0);
+        instance.push(1.0);
+        instance.push(2.0);
         instance.push(3.0);
         
        Object peeked =  instance.peek();
@@ -121,18 +126,14 @@ public class StackADTTest {
         instance.push(2.0);
         instance.push(3.0);
         Object[] newarray2 = instance.toArray();
-        System.out.println("The array that had enough space for all the items index 0 is ="+newarray2[0]);
-        System.out.println("The array that had enough space for all the items index 1 is ="+newarray2[1]);
-        System.out.println("The array that had enough space for all the items index 2 is ="+newarray2[2]);
         
         
-        Object[] newarray4 = instance.toArray();
-        System.out.println("The array that did not have enough space for all the items index 0 is ="+newarray4[0]);
-        System.out.println("The array that did not have enough space for all the items index 1 is ="+newarray4[1]);
-        System.out.println("The array that did not have enough space for all the items index 2 is ="+newarray4[2]);
-        assertEquals(newarray2[0],newarray4[0]);
-        assertEquals(newarray2[1],newarray4[1]);
-        assertEquals(newarray2[2],newarray4[2]);
+        
+        assertEquals(1.0,newarray2[0]);
+        assertEquals(2.0,newarray2[1]);
+        assertEquals(3.0,newarray2[2]);
+        
+        
     }
 
     /**
@@ -164,6 +165,10 @@ public class StackADTTest {
         assertEquals(newarray2[0],newarray4[0]);
         assertEquals(newarray2[1],newarray4[1]);
         assertEquals(newarray2[2],newarray4[2]);
+        
+        assertEquals(1.0,newarray2[0]);
+        assertEquals(2.0,newarray2[1]);
+        assertEquals(3.0,newarray2[2]);
     }
 
     /**

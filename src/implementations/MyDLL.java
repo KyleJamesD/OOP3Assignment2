@@ -398,44 +398,5 @@ public class MyDLL<E> implements ListADT<E> {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    /* old method 
-
-    @Override
-    public Iterator<E> iterator() {
-        Object[] array1 = toArray();
-        
-        GenericIterator iterator = new GenericIterator(array1);
-        return iterator;
-
-
-    }
-
-    // I actually dont think we need these two methods or to implment the Iterator class, should be set up as an internal class 
-    @Override
-    public boolean hasNext() {
-       return iterator().hasNext();
-
-    }
-
-    
-    // not sure why this wont let me return type E like ArrayList
-    @Override
-    public Node next() throws NoSuchElementException {
-           
-            
-        return null;
-           
-            
-    }
-            
-*/
-    
 //end of class
 }

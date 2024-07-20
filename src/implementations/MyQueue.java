@@ -13,10 +13,10 @@ import utilities.QueueADT;
  *
  * @author kyled
  */
-public class MyQueue<E extends MyDLL<E>> implements QueueADT<E> {
+public class MyQueue<E> implements QueueADT<E> {
 
     private MyDLL<E> list;
-    private final int size;
+    private int size;
     private static final int DEFAULT_CAPACITY = 10;
 
     public MyQueue() {
@@ -28,6 +28,7 @@ public class MyQueue<E extends MyDLL<E>> implements QueueADT<E> {
     public void enqueue(E toAdd) throws NullPointerException {
         if (toAdd == null) throw new NullPointerException();
         list.add(toAdd);
+        size++;
     }
 
     @Override
@@ -35,17 +36,22 @@ public class MyQueue<E extends MyDLL<E>> implements QueueADT<E> {
         if (list.isEmpty()) throw new EmptyQueueException();
         E temp = list.get(0);
         list.remove(0);
+        size--;
         return temp;
+        
     }
 
     @Override
     public E peek() throws EmptyQueueException {
+        if(size==0)
+        {throw new EmptyQueueException();}
         return list.get(0);
     }
 
     @Override
     public void dequeueAll() {
         list.clear();
+        size = 0;
     }
 
     @Override
@@ -60,7 +66,27 @@ public class MyQueue<E extends MyDLL<E>> implements QueueADT<E> {
 
     @Override
     public boolean equals(QueueADT<E> that) {
-        return that == this;
+        Iterator<E> thisIterator = this.iterator();
+        Iterator<?> thatIterator = that.iterator();
+        
+       
+        boolean x = false;
+        
+        if(this.size != that.size())
+        {return false;}
+        
+       
+        
+        while(thisIterator.hasNext() && thatIterator.hasNext())
+        {
+            if(thisIterator.next().equals(thatIterator.next()))
+            {
+            x = true;
+            }
+            else 
+            {return false;}
+        }
+        return x;
     }
 
     @Override
