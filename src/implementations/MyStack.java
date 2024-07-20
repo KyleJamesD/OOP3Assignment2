@@ -14,7 +14,7 @@ import utilities.StackADT;
  */
 
 
-public class MyStack<E extends MyArrayList<E>> implements StackADT<E>{
+public class MyStack<E> implements StackADT<E>{
 
     private final MyArrayList<E> stackArray;
     public int size;
@@ -121,7 +121,6 @@ public class MyStack<E extends MyArrayList<E>> implements StackADT<E>{
             if(thisIterator.next().equals(thatIterator.next()))
             {
             x = true;
-
             }
             else 
             {return false;}

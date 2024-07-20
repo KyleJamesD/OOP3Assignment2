@@ -20,17 +20,17 @@ public class StackADTTest {
     
     public StackADTTest() {
         
-        int capacity = 10;
-        Double data1[] = new Double[10];
-        data1[0] = 6.0;
-        data1[1] = 7.0;
-        data1[2] = 8.0;
-        data1[3] = 9.0;
-        ListADT<Double> instance = new MyArrayList<>(capacity, data1);
+        
     }
+    
+    MyStack instance;
     
     @Before
     public void setUp() {
+        
+        instance = new MyStack<>();
+        
+        
     }
 
     /**
@@ -38,12 +38,12 @@ public class StackADTTest {
      */
     @Test
     public void testPush() {
-        System.out.println("push");
-        Object toAdd = null;
-        StackADT instance = new StackADTImpl();
-        instance.push(toAdd);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.push(1.0);
+        instance.push(2.0);
+        instance.push(3.0);
+        instance.push(4.0);
+        assertEquals(4.0,instance.peek()); 
+        
     }
 
     /**
@@ -51,13 +51,14 @@ public class StackADTTest {
      */
     @Test
     public void testPop() {
-        System.out.println("pop");
-        StackADT instance = new StackADTImpl();
-        Object expResult = null;
-        Object result = instance.pop();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.push(1.0);
+        
+        Object expectedresult = instance.pop();
+        assertEquals(1.0,expectedresult);
+        
+        //instance.push(1.0);
+        Object isEmpty = instance.isEmpty();
+        assertEquals(true,isEmpty);
     }
 
     /**
@@ -65,13 +66,16 @@ public class StackADTTest {
      */
     @Test
     public void testPeek() {
-        System.out.println("peek");
-        StackADT instance = new StackADTImpl();
-        Object expResult = null;
-        Object result = instance.peek();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       // instance.push(1.0);
+        //instance.push(2.0);
+        instance.push(3.0);
+        
+       Object peeked =  instance.peek();
+       assertEquals(peeked,3.0);
+       
+       
+       Object isEmpty = instance.isEmpty();
+       assertEquals(false,isEmpty);
     }
 
     /**
@@ -79,11 +83,16 @@ public class StackADTTest {
      */
     @Test
     public void testClear() {
-        System.out.println("clear");
-        StackADT instance = new StackADTImpl();
-        instance.clear();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.push(3.0);
+        Object isEmpty = instance.isEmpty();
+       assertEquals(false,isEmpty);
+       
+       
+       instance.clear();
+       Object isEmpty2 = instance.isEmpty();
+       assertEquals(true,isEmpty2);
+       
+       
     }
 
     /**
@@ -91,13 +100,16 @@ public class StackADTTest {
      */
     @Test
     public void testIsEmpty() {
-        System.out.println("isEmpty");
-        StackADT instance = new StackADTImpl();
-        boolean expResult = false;
-        boolean result = instance.isEmpty();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.push(3.0);
+        Object isEmpty = instance.isEmpty();
+       assertEquals(false,isEmpty);
+       
+       
+       instance.pop();
+       Object isEmpty2 = instance.isEmpty();
+       assertEquals(true,isEmpty2);
+        
+        
     }
 
     /**
@@ -105,13 +117,22 @@ public class StackADTTest {
      */
     @Test
     public void testToArray_0args() {
-        System.out.println("toArray");
-        StackADT instance = new StackADTImpl();
-        Object[] expResult = null;
-        Object[] result = instance.toArray();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.push(1.0);
+        instance.push(2.0);
+        instance.push(3.0);
+        Object[] newarray2 = instance.toArray();
+        System.out.println("The array that had enough space for all the items index 0 is ="+newarray2[0]);
+        System.out.println("The array that had enough space for all the items index 1 is ="+newarray2[1]);
+        System.out.println("The array that had enough space for all the items index 2 is ="+newarray2[2]);
+        
+        
+        Object[] newarray4 = instance.toArray();
+        System.out.println("The array that did not have enough space for all the items index 0 is ="+newarray4[0]);
+        System.out.println("The array that did not have enough space for all the items index 1 is ="+newarray4[1]);
+        System.out.println("The array that did not have enough space for all the items index 2 is ="+newarray4[2]);
+        assertEquals(newarray2[0],newarray4[0]);
+        assertEquals(newarray2[1],newarray4[1]);
+        assertEquals(newarray2[2],newarray4[2]);
     }
 
     /**
@@ -119,14 +140,30 @@ public class StackADTTest {
      */
     @Test
     public void testToArray_GenericType() {
-        System.out.println("toArray");
-        Object[] holder = null;
-        StackADT instance = new StackADTImpl();
-        Object[] expResult = null;
-        Object[] result = instance.toArray(holder);
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.push(1.0);
+        instance.push(2.0);
+        instance.push(3.0);
+        
+        
+        Object[] newarray = new Object[10];
+        
+        Object[] newarray2 = instance.toArray(newarray);
+        System.out.println("The array that had enough space for all the items index 0 is ="+newarray2[0]);
+        System.out.println("The array that had enough space for all the items index 1 is ="+newarray2[1]);
+        System.out.println("The array that had enough space for all the items index 2 is ="+newarray2[2]);
+        
+        
+        Object[] newarray3 = new Object[2];
+        
+        Object[] newarray4 = instance.toArray(newarray3);
+        System.out.println("The array that did not have enough space for all the items index 0 is ="+newarray4[0]);
+        System.out.println("The array that did not have enough space for all the items index 1 is ="+newarray4[1]);
+        System.out.println("The array that did not have enough space for all the items index 2 is ="+newarray4[2]);
+        
+        
+        assertEquals(newarray2[0],newarray4[0]);
+        assertEquals(newarray2[1],newarray4[1]);
+        assertEquals(newarray2[2],newarray4[2]);
     }
 
     /**
@@ -134,14 +171,22 @@ public class StackADTTest {
      */
     @Test
     public void testContains() {
-        System.out.println("contains");
-        Object toFind = null;
-        StackADT instance = new StackADTImpl();
-        boolean expResult = false;
-        boolean result = instance.contains(toFind);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.push(1.0);
+        instance.push(2.0);
+        instance.push(3.0);
+        
+        
+        
+       Object expectedResult = instance.contains(3.0);
+       assertEquals(true,expectedResult);
+       
+       
+       Object expectedResult2 = instance.contains(4.0);
+       assertEquals(false,expectedResult2);
+       
+       
+       
+       
     }
 
     /**
@@ -149,14 +194,20 @@ public class StackADTTest {
      */
     @Test
     public void testSearch() {
-        System.out.println("search");
-        Object toFind = null;
-        StackADT instance = new StackADTImpl();
-        int expResult = 0;
-        int result = instance.search(toFind);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       instance.push(1.0);
+        instance.push(2.0);
+        instance.push(3.0);
+        
+        
+       int result1 = instance.search(1.0);
+       int result2 = instance.search(2.0);
+       int result3 = instance.search(3.0);
+       
+       assertEquals(0,result1);
+       assertEquals(1,result2);
+       assertEquals(2,result3);
+       assertNotEquals(3,result3);
+       
     }
 
     /**
@@ -164,13 +215,20 @@ public class StackADTTest {
      */
     @Test
     public void testIterator() {
-        System.out.println("iterator");
-        StackADT instance = new StackADTImpl();
-        Iterator expResult = null;
-        Iterator result = instance.iterator();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        instance.push(1.0);
+        instance.push(2.0);
+        instance.push(3.0);
+        
+        
+        
+        Iterator<Object> iterator = instance.iterator();
+        
+        
+        assertTrue(iterator.hasNext());
+        assertEquals(1.0, iterator.next());
+        assertEquals(2.0, iterator.next());
+        assertEquals(3.0, iterator.next());
     }
 
     /**
@@ -178,13 +236,31 @@ public class StackADTTest {
      */
     @Test
     public void testEquals() {
-        System.out.println("equals");
-        StackADT instance = new StackADTImpl();
-        boolean expResult = false;
-        boolean result = instance.equals(null);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        instance.push(1.0);
+        instance.push(2.0);
+        instance.push(3.0);
+        
+        
+        MyStack instance2 = new MyStack<>();
+        instance2.push(1.0);
+        instance2.push(2.0);
+        instance2.push(3.0);
+        boolean result = instance.equals(instance2);
+        assertEquals(true,result);
+        
+        
+        MyStack instance3 = new MyStack<>();
+        instance3.push(1.0);
+        instance3.push(2.0);
+        instance3.push(25.0);
+        boolean result2 = instance.equals(instance3);
+        assertEquals(false,result2);
+        
+        
+        
+        
+        
     }
 
     /**
@@ -192,62 +268,16 @@ public class StackADTTest {
      */
     @Test
     public void testSize() {
-        System.out.println("size");
-        StackADT instance = new StackADTImpl();
-        int expResult = 0;
-        int result = instance.size();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        instance.push(1.0);
+        instance.push(2.0);
+        instance.push(3.0);
+        
+       int result = instance.size();
+       assertEquals(3,result);
+        
+        
     }
 
-    public class StackADTImpl implements StackADT {
-
-        public void push(E toAdd) throws NullPointerException {
-        }
-
-        public E pop() throws EmptyStackException {
-            return null;
-        }
-
-        public E peek() throws EmptyStackException {
-            return null;
-        }
-
-        public void clear() {
-        }
-
-        public boolean isEmpty() {
-            return false;
-        }
-
-        public Object[] toArray() {
-            return null;
-        }
-
-        public E[] toArray(E[] holder) throws NullPointerException {
-            return null;
-        }
-
-        public boolean contains(E toFind) throws NullPointerException {
-            return false;
-        }
-
-        public int search(E toFind) {
-            return 0;
-        }
-
-        public Iterator<E> iterator() {
-            return null;
-        }
-
-        public boolean equals(StackADT<E> that) {
-            return false;
-        }
-
-        public int size() {
-            return 0;
-        }
-    }
     
 }
