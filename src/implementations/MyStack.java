@@ -1,39 +1,43 @@
-package utilities;
+package src.implementations;
 
 import java.util.EmptyStackException;
+import java.util.NoSuchElementException;
 
-public class MyStack<E extends MyArrayList<E>> implements StackADT<E>{
+public class MyStack<E> implements StackADT<E> {
 
-    private final MyArrayList<E> list;
-    private final int size;
+    private MyArrayList<E> list;
+    private int size;
 
     public MyStack() {
-        list = new MyArrayList<E>();
+        list = new MyArrayList<>();
         size = 0;
     }
 
     @Override
     public void push(E toAdd) throws NullPointerException {
-        list.add(0, toAdd);
+        list.add(0, (E) toAdd);
+        size += 1;
     }
 
     @Override
     public E pop() throws EmptyStackException {
         if (size == 0) throw new EmptyStackException();
-        MyArrayList<E> temp = list;
-        if (size == 1) return list.remove(0);
-        else return list.remove(size-1);
+        E temp = list.get(0);
+        list.remove(0);
+        size -= 1;
+        return temp;
     }
 
     @Override
     public E peek() throws EmptyStackException {
         if (size == 0) throw new EmptyStackException();
-        return list.get(1);
+        return list.get(0);
     }
 
     @Override
     public void clear() {
         list.clear();
+        size = 0;
     }
 
     @Override
@@ -71,13 +75,36 @@ public class MyStack<E extends MyArrayList<E>> implements StackADT<E>{
 
     @Override
     public Iterator<E> iterator() {
-        return list.iterator();
+        return new MyStackIterator();
+    }
+
+    private class MyStackIterator implements Iterator<E>{
+
+        private int index = 0;
+
+        @Override
+        public boolean hasNext() {
+            return index < size;
+        }
+
+        @Override
+        public E next() throws NoSuchElementException {
+            if (!hasNext()) throw new NoSuchElementException();
+            return list.get(index++);
+        }
     }
 
     @Override
     public boolean equals(StackADT<E> that) {
         if (that == this) return true;
-        return false;
+        Iterator<E> thisIterator = this.iterator();
+        Iterator<E> thatIterator = that.iterator();
+        while (thisIterator.hasNext() && thatIterator.hasNext()) {
+            if (!thisIterator.next().equals(thatIterator.next())) {
+                return false;
+            }
+        }
+        return !thisIterator.hasNext() && !thatIterator.hasNext();
     }
 
     @Override
